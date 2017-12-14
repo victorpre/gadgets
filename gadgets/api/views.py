@@ -1,3 +1,8 @@
+from rest_framework.filters import (
+        SearchFilter,
+        OrderingFilter,
+    )
+
 from rest_framework import generics
 from django.http import Http404
 from rest_framework.views import APIView
@@ -28,6 +33,9 @@ class CreateView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
+
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['name']
 
     def perform_create(self, serializer):
         """Save the post data when creating a new company."""
