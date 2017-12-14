@@ -7,5 +7,5 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
         model = Company
-        fields = ('id', 'name', 'created_at', 'updated_at')
+        fields = ('id', 'name')
         read_only_fields = ('created_at', 'updated_at')
