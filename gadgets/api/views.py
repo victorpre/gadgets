@@ -3,7 +3,10 @@ from rest_framework.filters import (
         OrderingFilter,
     )
 
-from rest_framework import generics
+from rest_framework.generics import (
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView
+    )
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,6 +14,8 @@ from rest_framework import status
 
 from .serializers import CompanySerializer
 from .models import Company
+
+from . import company_service
 
 #   class CompanyList(APIView):
 #      """
@@ -29,19 +34,22 @@ from .models import Company
 #          return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CreateView(generics.ListCreateAPIView):
+class CompanyListCreateView(ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
-    queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['name']
+    def get_queryset(self):
+        """
+        Optionally restricts the returned companys to a given name,
+        by filtering against a `name` query parameter in the URL.
+        """
+        return company_service.get_companies(self.request.query_params)
 
     def perform_create(self, serializer):
         """Save the post data when creating a new company."""
         serializer.save()
 
-class DetailsView(generics.RetrieveUpdateDestroyAPIView):
+class DetailsView(RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
 
     queryset = Company.objects.all()
