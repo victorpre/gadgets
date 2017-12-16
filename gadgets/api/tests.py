@@ -4,7 +4,6 @@ from django.urls import reverse
 
 from django.test import TestCase
 from .models import Company
-# Create your tests here.
 
 class ModelTestCase(TestCase):
     """This class defines the test suite for the Company model."""
@@ -56,6 +55,15 @@ class ViewTestCase(TestCase):
             change_company, format='json'
         )
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_api_cannot_update_when_not_company(self):
+        """Test the api cannnot update a given company."""
+        change_company = {'name': 'Something new'}
+        res = self.client.put(
+            reverse('details', kwargs={'pk': 9999}),
+            change_company, format='json'
+        )
+        self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_api_can_delete_company(self):
         """Test the api can delete a company."""
