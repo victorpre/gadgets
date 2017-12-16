@@ -1,5 +1,8 @@
 # Simple django REST API using Django Rest Framework
 
+[![Build Status](https://travis-ci.org/victorpre/gadgets.svg?branch=master)](https://travis-ci.org/victorpre/gadgets)
+
+
 ## Development Instructions:
 
 - `virtualenv venv`
