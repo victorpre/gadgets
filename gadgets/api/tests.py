@@ -4,8 +4,9 @@ from django.urls import reverse
 
 from django.test import TestCase
 from .models import Company
+from .models import DeviceModel
 
-class ModelTestCase(TestCase):
+class CompanyModelTestCase(TestCase):
     """This class defines the test suite for the Company model."""
 
     def setUp(self):
@@ -20,7 +21,7 @@ class ModelTestCase(TestCase):
         new_count = Company.objects.count()
         self.assertNotEqual(old_count, new_count)
 
-class ViewTestCase(TestCase):
+class CompanyViewTestCase(TestCase):
     """Test suite for the api views."""
 
     def setUp(self):
@@ -74,3 +75,23 @@ class ViewTestCase(TestCase):
             follow=True)
 
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class DeviceModelModelTestCase(TestCase):
+    """This class defines the test suite for the DeviceModel model."""
+
+    def create_company(self, name="Apple"):
+        return Company.objects.create(name=name)
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        company = self.create_company()
+        self.device_model_name = "iPhone"
+        self.release_year = 2000
+        self.device_model = DeviceModel(name=self.device_model_name, release_year=self.release_year, company=company)
+
+    def test_model_can_create_a_device_model(self):
+        """Test the device_model model can create a device model."""
+        old_count = DeviceModel.objects.count()
+        self.device_model.save()
+        new_count = DeviceModel.objects.count()
+        self.assertNotEqual(old_count, new_count)
