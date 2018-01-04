@@ -29,7 +29,7 @@ class CompanyViewTestCase(TestCase):
         self.client = APIClient()
         self.company_data = {'name': 'Apple'}
         self.response = self.client.post(
-            reverse('create'),
+            reverse('create_company'),
             self.company_data,
             format="json")
 
@@ -85,7 +85,7 @@ class DeviceModelModelTestCase(TestCase):
     def setUp(self):
         """Define the test client and other test variables."""
         company = self.create_company()
-        self.device_model_name = "iPhone"
+        self.device_model_name = "iPhone 3GS"
         self.release_year = 2000
         self.device_model = DeviceModel(name=self.device_model_name, release_year=self.release_year, company=company)
 
@@ -95,3 +95,26 @@ class DeviceModelModelTestCase(TestCase):
         self.device_model.save()
         new_count = DeviceModel.objects.count()
         self.assertNotEqual(old_count, new_count)
+
+class DeviceModelViewTestCase(TestCase):
+    """Test suite for the company api views."""
+    def create_company(self, name="Apple"):
+        return Company.objects.create(name=name)
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+        self.company_data = {
+                                'name'        : 'iPhone 3GS',
+                                'release_year': 2010,
+                                'device_type' : DeviceModel.TYPE_SMARTPHONE,
+                                'company'     : self.create_company().id
+                            }
+        self.response = self.client.post(
+            reverse('create_device_model'),
+            self.company_data,
+            format="json")
+
+    def test_api_can_create_a_device_model(self):
+        """Test the api has device model creation capability."""
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)

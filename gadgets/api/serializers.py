@@ -1,5 +1,9 @@
 from rest_framework import serializers
-from .models import Company
+from rest_framework.serializers import SerializerMethodField
+from .models import (
+                Company,
+                DeviceModel,
+            )
 
 class CompanySerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
@@ -9,3 +13,15 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ('id', 'name')
         read_only_fields = ('created_at', 'updated_at')
+
+class DeviceModelSerializer(serializers.ModelSerializer):
+    """Serializer to map the Model instance into JSON format."""
+    device_type = SerializerMethodField()
+    class Meta:
+        """Meta class to map serializer's fields with the model fields."""
+        model = DeviceModel
+        fields = ('id', 'name', 'company', 'release_year', 'device_type')
+        read_only_fields = ('created_at', 'updated_at')
+
+    def get_device_type(self, obj):
+        return obj.get_device_type_display()
