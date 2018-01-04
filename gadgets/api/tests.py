@@ -29,7 +29,7 @@ class CompanyViewTestCase(TestCase):
         self.client = APIClient()
         self.company_data = {'name': 'Apple'}
         self.response = self.client.post(
-            reverse('create'),
+            reverse('create_company'),
             self.company_data,
             format="json")
 
