@@ -6,6 +6,7 @@ from rest_framework.serializers import (
 from .models import (
                 Company,
                 DeviceModel,
+                Device,
             )
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -29,3 +30,14 @@ class DeviceModelSerializer(serializers.ModelSerializer):
 
     def get_device_type(self, obj):
         return obj.get_device_type_display()
+
+class DeviceSerializer(serializers.ModelSerializer):
+    """Serializer to map the Model instance into JSON format."""
+    device_model_id = PrimaryKeyRelatedField(queryset=DeviceModel.objects.all(), source='device_model', label="Device")
+    class Meta:
+        """Meta class to map serializer's fields with the model fields."""
+        model = Device
+
+        fields = ('id', 'device_model_id','capacity', 'color', 'os_version')
+        read_only_fields = ('created_at', 'updated_at')
+
