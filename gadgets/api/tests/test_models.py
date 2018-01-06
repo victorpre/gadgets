@@ -2,6 +2,7 @@ from django.test import TestCase
 from gadgets.api.models import (
                 Company,
                 DeviceModel,
+                Device,
             )
 
 class CompanyModelTestCase(TestCase):
@@ -37,5 +38,30 @@ class DeviceModelModelTestCase(TestCase):
         old_count = DeviceModel.objects.count()
         self.device_model.save()
         new_count = DeviceModel.objects.count()
+        self.assertNotEqual(old_count, new_count)
+
+class DeviceModelTestCase(TestCase):
+    """This class defines the test suite for the Device model."""
+
+    def create_company(self, name="Apple"):
+        return Company.objects.create(name=name)
+
+    def create_device_model(self, name="iPhone 3GS", release_year=2000, company=None):
+        company = self.create_company()
+        return DeviceModel.objects.create(name=name, release_year=release_year, company=company)
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.color = "Black"
+        self.capacity = 32
+        self.os_version = "iOS 6"
+        self.device_model = self.create_device_model()
+        self.device = Device(color=self.color, capacity=self.capacity, os_version=self.os_version, device_model=self.device_model)
+
+    def test_model_can_create_a_device(self):
+        """Test the device model can create a device."""
+        old_count = Device.objects.count()
+        self.device.save()
+        new_count = Device.objects.count()
         self.assertNotEqual(old_count, new_count)
 
