@@ -36,5 +36,5 @@ class Device(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "%s %s - %s" % (self.device_model, self.capacity, self.color)
+        return "%s %s GB - %s" % (self.device_model, self.capacity, self.color)
 
