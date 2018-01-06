@@ -3,6 +3,7 @@ from django.test import TestCase
 from gadgets.api.models import (
                 Company,
                 DeviceModel,
+                Device,
             )
 
 from rest_framework.test import APIClient
@@ -65,24 +66,52 @@ class CompanyViewTestCase(TestCase):
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
 
 class DeviceModelViewTestCase(TestCase):
-    """Test suite for the company api views."""
+    """Test suite for the device movel api views."""
     def create_company(self, name="Apple"):
         return Company.objects.create(name=name)
 
     def setUp(self):
         """Define the test client and other test variables."""
         self.client = APIClient()
-        self.company_data = {
+        self.device_model_data = {
                                 'name'        : 'iPhone 3GS',
                                 'release_year': 2010,
                                 'device_type' : DeviceModel.TYPE_SMARTPHONE,
-                                'company'     : self.create_company().id
+                                'company_id'     : self.create_company().id
                             }
         self.response = self.client.post(
             reverse('create_device_model'),
-            self.company_data,
+            self.device_model_data,
             format="json")
 
     def test_api_can_create_a_device_model(self):
         """Test the api has device model creation capability."""
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+
+class DeviceViewTestCase(TestCase):
+    """Test suite for the device api views."""
+    def create_company(self, name="Apple"):
+        return Company.objects.create(name=name)
+
+    def create_device_model(self, name="iPhone 3GS", release_year=2000, company=None):
+        company = self.create_company()
+        return DeviceModel.objects.create(name=name, release_year=release_year, company=company)
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+        self.device_data = {
+                                'device_model_id' : self.create_device_model().id,
+                                'capacity'        : 32,
+                                'color'           : 'White',
+                                'os_version'      : 'iOS 7'
+                            }
+        self.response = self.client.post(
+            reverse('create_device'),
+            self.device_data,
+            format="json")
+
+    def test_api_can_create_a_device(self):
+        """Test the api has device creation capability."""
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)

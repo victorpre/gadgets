@@ -5,6 +5,7 @@ from django.contrib import admin
 from .models import (
                 Company,
                 DeviceModel,
+                Device,
             )
 
 class CompanyModelAdmin(admin.ModelAdmin):
@@ -19,5 +20,11 @@ class DeviceModelModelAdmin(admin.ModelAdmin):
     class Meta:
         model = DeviceModel
 
+class DeviceModelAdmin(admin.ModelAdmin):
+    list_display = ["device_model", "capacity", "color", "os_version", "created_at", "updated_at"]
+    class Meta:
+        model = Device
+
 admin.site.register(Company, CompanyModelAdmin)
 admin.site.register(DeviceModel, DeviceModelModelAdmin)
+admin.site.register(Device, DeviceModelAdmin)

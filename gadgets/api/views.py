@@ -5,11 +5,13 @@ from rest_framework import status
 from .serializers import (
                     CompanySerializer,
                     DeviceModelSerializer,
+                    DeviceSerializer,
                 )
 
 from .models import (
                 Company,
                 DeviceModel,
+                Device,
             )
 
 from . import company_service
@@ -62,7 +64,7 @@ class DeviceModelListCreateView(APIView):
     serializer_class = DeviceModelSerializer
 
     def get(self, request, format=None):
-        """Retrieves the list of companies. """
+        """Retrieves the list of device models. """
         device_models = DeviceModel.objects.all()
         serializer = DeviceModelSerializer(device_models, many=True)
         return Response(serializer.data)
@@ -71,6 +73,26 @@ class DeviceModelListCreateView(APIView):
     def post(self, request, format=None):
         """Save the post data when creating a new device model."""
         serializer = DeviceModelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeviceListCreateView(APIView):
+    """This class defines the create behavior of our rest api."""
+    serializer_class = DeviceSerializer
+
+    def get(self, request, format=None):
+        """Retrieves the list of devices. """
+        devices = Device.objects.all()
+        serializer = DeviceSerializer(devices, many=True)
+        return Response(serializer.data)
+
+
+    def post(self, request, format=None):
+        """Save the post data when creating a new device."""
+        serializer = DeviceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

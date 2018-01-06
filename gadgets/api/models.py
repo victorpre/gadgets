@@ -26,3 +26,15 @@ class DeviceModel(models.Model):
 
     def __str__(self):
         return "{}".format(self.name)
+
+class Device(models.Model):
+    color = models.CharField(max_length=50, blank=False, null=False)
+    capacity = models.PositiveSmallIntegerField(blank=False, null=False)
+    os_version = models.CharField(max_length=50, blank=False, null=False)
+    device_model = models.ForeignKey('DeviceModel', on_delete=models.DO_NOTHING)
+    created_at =  models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "%s %s GB - %s" % (self.device_model, self.capacity, self.color)
+
