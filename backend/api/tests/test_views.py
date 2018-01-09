@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from gadgets.api.models import (
+from api.models import (
                 Company,
                 DeviceModel,
                 Device,
