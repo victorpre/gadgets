@@ -1,0 +1,24 @@
+{
+  "name": "gadgets-frontend",
+  "description": "Angular application consuming API",
+  "main": "server.js",
+  "authors": [
+    "Victor Presumido"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_cache"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "angular-resource": "~1.4.8",
+    "angular-material": "x.x.x"
+  },
+  "resolutions": {
+    "angular": "^1.5.7"
+  }
+}
