@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html ng-app="GadgetsApp">
-    <head>
-        <meta charset="utf-8">
-        <title>Gadgets Management</title>
+  <head>
+    <meta charset="utf-8">
+    <title>Gadgets Management</title>
 
-        <!--  Angular Setup -->
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-        <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-        <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <!--  Angular Setup -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
 
 
-        <!-- Application Stylesheets -->
-        <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Application Stylesheets -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <!-- Application Setup -->
-        <script src="public/appRoutes.js"></script>
-        <script src="public/app.js"></script>
+    <!-- Application Setup -->
+    <script src="public/appRoutes.js"></script>
+    <script src="public/app.js"></script>
+    <script src="public/Ajax/AjaxConfig.js"></script>
+    <script src="public/Ajax/AjaxService.js"></script>
 
-        <!--  Controllers -->
-        <script src="public/Gadgets/GadgetsController.js"></script>
+    <!--  Controllers -->
+    <script src="public/Gadgets/GadgetsController.js"></script>
+    <script src="public/Navbar/NavbarController.js"></script>
 
-        <!--  Services -->
-    </head>
-    <body>
-      <md-toolbar class="md-hue-2">
-        <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
-            <i class="material-icons" style="color:#fff;">menu</i>
-          </md-button>
-          <h2 flex md-truncate>Gadgets Management</h2>
-        </div>
-      </md-toolbar>
-      <!-- The dynamic templates will be served within this div -->
-      <ui-view></ui-view>
-    </body>
+    <!--  Services -->
+    <script src="public/Gadgets/GadgetsService.js"></script>
+  </head>
+  <body>
+    <div layout="column">
+      <section layout="row" flex>
+        <md-sidenav
+          class="md-sidenav-left"
+          md-component-id="left-menu"
+          md-whiteframe="4">
+          <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">Menu</h1>
+          </md-toolbar>
+          <md-content flex layout-padding>
+            <!-- Menu -->
+          </md-content>
+        </md-sidenav>
+        <md-toolbar ng-controller="NavbarController" class="md-hue-2">
+          <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Menu" ng-disabled="false" ng-click="openLeftMenu()">
+              <i class="material-icons" style="color:#fff;">menu</i>
+            </md-button>
+            <h2 flex md-truncate>Gadgets Management</h2>
+          </div>
+        </md-toolbar>
+        <md-content flex>
+          <div layout="column" layout-align="top center">
+            <!-- The dynamic templates will be served within this div -->
+            <ui-view></ui-view>
+          </div>
+        </md-content>
+      </section>
+    </div>
+  </body>
 </html>

@@ -1,3 +1,7 @@
-gadgets.controller('GadgetsController', function($scope) {
-  $scope.nome = "Jaburu"
-});
+gadgets.controller('GadgetsController', GadgetsController );
+
+function GadgetsController(GadgetsService) {
+  var ctrl = this;
+  ctrl.service = GadgetsService;
+  ctrl.service.init();
+}
