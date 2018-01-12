@@ -1,0 +1,21 @@
+{
+  "name": "gadgets-frontend",
+  "version": "0.0.1",
+  "description": "Angular application consuming API",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:victorpre/gadgets.git"
+  },
+  "author": "Victor Presumido",
+  "homepage": "https://github.com/victorpre/gadgets/blob/master/README.md",
+  "dependencies": {
+    "express": "^4.13.4",
+    "bower": "1.7.9"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "node app/server.js"
+  }
+}
