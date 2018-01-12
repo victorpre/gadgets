@@ -1,8 +1,6 @@
 'use strict';
 
-var retail = angular.module("retail", [
-        'ngResource'
-    ]);
+var ajax = angular.module("ajax", []);
 
 var gadgets = angular.module("gadgets", [
         'ngResource'
@@ -10,7 +8,8 @@ var gadgets = angular.module("gadgets", [
 
 angular
     .module('GadgetsApp', [
-        'appRoutes',
-        'ngMaterial',
-        'gadgets'
+      'appRoutes',
+      'ngMaterial',
+      'ajax',
+      'gadgets'
     ]);
