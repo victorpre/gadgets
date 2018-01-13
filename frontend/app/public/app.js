@@ -11,6 +11,7 @@ angular
     .module('GadgetsApp', [
       'appRoutes',
       'ngMaterial',
+      'md.data.table',
       'ajax',
       'navbar',
       'gadgets'
