@@ -15,7 +15,7 @@ function GadgetsService(Ajax) {
     var promisse = Ajax.get(projectsApiBulkEndpoint);
     promisse.then(function(result){
       console.log(result);
-      service.devices = result.data.devices;
+      service.devices = result.data;
     });
     return promisse;
   }
