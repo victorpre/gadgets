@@ -3,8 +3,8 @@
     <div class="md-toolbar-tools">
       <span>Devices</span>
       <div flex></div>
-      <md-button class="md-icon-button" ng-click="loadStuff()">
-        <md-icon>refresh</md-icon>
+      <md-button class="md-fab" ng-click="addDialog()">
+        <md-icon style="color:#fff;">add</md-icon>
       </md-button>
     </div>
   </md-toolbar>
@@ -14,16 +14,16 @@
       <thead md-head md-order="query.order" md-on-reorder="getDevices">
         <tr md-row>
           <th md-column md-order-by="id"><span>ID</span></th>
-          <th md-column md-numeric>Device Model ID</th>
+          <th md-column md-numeric>Device Model</th>
           <th md-column md-numeric>Capacity (GB)</th>
           <th md-column >Color</th>
           <th md-column >OS Version</th>
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row md-select="device" md-select="device" md-auto-select ng-repeat="device in service.devices|  orderBy: query.order">
+        <tr md-row md-select="device" md-select="device" md-auto-select ng-repeat="device in service.devices | orderBy: query.order">
           <td md-cell> {{ device.id }} </td>
-          <td md-cell> {{ device.device_model_id }} </td>
+          <td md-cell> {{ service.getDeviceModelName(device.device_model_id) }} </td>
           <td md-cell> {{ device.capacity }} GB </td>
           <td md-cell> {{ device.color }} </td>
           <td md-cell> {{ device.os_version }} </td>
