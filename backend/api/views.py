@@ -97,3 +97,14 @@ class DeviceListCreateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DeviceRetrieveUpdateDestroyView(APIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+
+    def delete(self, request, pk, format=None):
+        """Delete a single device record."""
+        device = Device.objects.get(pk=pk)
+        device.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
