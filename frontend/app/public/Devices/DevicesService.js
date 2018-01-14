@@ -8,8 +8,7 @@ function DevicesService($q, $filter, Ajax) {
   var service = {
     init: init,
     getDeviceModelName: getDeviceModelName,
-    addDevice: addDevice,
-    getDeviceModelOptions: getDeviceModelOptions
+    addDevice: addDevice
   };
 
   return service;
@@ -49,18 +48,5 @@ function DevicesService($q, $filter, Ajax) {
     function error(result) {
       console.log(result);
     }
-  }
-
-  function getDeviceModelOptions() {
-    var defer = $q.defer();
-    var promisses = {};
-    promisses.device_models = Ajax.get(deviceModelsEndpoint);
-    $q.all(promisses).then(function(result) {
-      service.device_models = result.device_models.data;
-      console.log("oie");
-    }, function(error){
-      defer.reject(error);
-    });
-    return defer.promise;
   }
 };
