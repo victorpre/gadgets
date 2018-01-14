@@ -1,5 +1,5 @@
 <md-dialog aria-label="Add a new device">
-  <form ng-cloak>
+  <form ng-cloak name="addDeviceForm" novalidate ng-submit="addDeviceForm.$valid && dialogService.addDevice(device)">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>Add a new device</h2>
@@ -17,12 +17,12 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm >
             <label>Device Model</label>
-            <md-select required  name="device_model_id" ng-model="device.device_model_id" md-on-open="dialogService.getDeviceModelOptions()" >
+            <md-select required name="device_model_id" ng-model="device.device_model_id" md-on-open="dialogService.getDeviceModelOptions()" >
               <md-option ng-repeat="device_model in dialogService.getDeviceModelOptions()" ng-value="device_model.id">
                 {{device_model.name}}
               </md-option>
             </md-select>
-            <div ng-messages="device_model_id.$error">
+            <div ng-messages="addDeviceForm.device_model_id.$error">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -32,41 +32,41 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>Color</label>
             <input required name="color" ng-model="device.color">
-            <div ng-messages="color.$error">
+            <div ng-messages="addDeviceForm.color.$error">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
         </div>
 
-      <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Capacity (GB)</label>
-          <input required name="capacity" type="number" ng-model="device.capacity">
-          <div ng-messages="capacity.$error">
-            <div ng-message="required">This is required.</div>
-          </div>
-        </md-input-container>
-      </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Capacity (GB)</label>
+            <input required name="capacity" type="number" ng-model="device.capacity">
+            <div ng-messages="addDeviceForm.capacity.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </div>
 
-      <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>OS Version</label>
-          <input required name="os_version" ng-model="device.os_version">
-          <div ng-messages="os_version.$error">
-            <div ng-message="required">This is required.</div>
-          </div>
-        </md-input-container>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>OS Version</label>
+            <input required name="os_version" ng-model="device.os_version">
+            <div ng-messages="addDeviceForm.os_version.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </div>
       </div>
-    </div>
 
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
       <span flex></span>
       <md-button ng-click="dialogService.cancel()">
-       Cancel
+        Cancel
       </md-button>
-      <md-button ng-click="dialogService.addDevice(device)">
+      <md-button type="submit">
         Add
       </md-button>
     </md-dialog-actions>
