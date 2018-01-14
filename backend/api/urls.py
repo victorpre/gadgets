@@ -5,6 +5,7 @@ from .views import (
                 CompanyRetrieveUpdateDestroyView,
                 DeviceModelListCreateView,
                 DeviceListCreateView,
+                DeviceRetrieveUpdateDestroyView,
             )
 
 urlpatterns =[
@@ -12,6 +13,7 @@ urlpatterns =[
     path('companies/<int:pk>', CompanyRetrieveUpdateDestroyView.as_view(), name="details"),
     path('device_models/', DeviceModelListCreateView.as_view(), name="create_device_model"),
     path('devices/', DeviceListCreateView.as_view(), name="create_device"),
+    path('devices/<int:pk>', DeviceRetrieveUpdateDestroyView.as_view(), name="device_details"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
