@@ -4,7 +4,7 @@
       <div class="md-toolbar-tools">
         <h2>Add a new device</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
+        <md-button class="md-icon-button" ng-click="dialogService.cancel()">
           <md-icon style="color:#fff;" aria-label="Close dialog">close</md-icon>
         </md-button>
       </div>
@@ -17,8 +17,8 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm >
             <label>Device Model</label>
-            <md-select required  name="device_model_id" ng-model="device.device_model_id">
-              <md-option ng-repeat="device_model in service.device_models" ng-value="device_model.id">
+            <md-select required  name="device_model_id" ng-model="device.device_model_id" md-on-open="dialogService.getDeviceModelOptions()" >
+              <md-option ng-repeat="device_model in dialogService.getDeviceModelOptions()" ng-value="device_model.id">
                 {{device_model.name}}
               </md-option>
             </md-select>
@@ -63,10 +63,10 @@
 
     <md-dialog-actions layout="row">
       <span flex></span>
-      <md-button ng-click="cancel()">
+      <md-button ng-click="dialogService.cancel()">
        Cancel
       </md-button>
-      <md-button ng-click="addDevice(device)">
+      <md-button ng-click="dialogService.addDevice(device)">
         Add
       </md-button>
     </md-dialog-actions>

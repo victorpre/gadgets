@@ -1,6 +1,6 @@
-gadgets.factory('GadgetsService', GadgetsService);
+devices.factory('DevicesService', DevicesService);
 
-function GadgetsService($q, $filter, Ajax) {
+function DevicesService($q, $filter, Ajax) {
 
   var devicesEndpoint = 'api/devices/';
   var deviceModelsEndpoint = 'api/device_models/';
@@ -8,7 +8,8 @@ function GadgetsService($q, $filter, Ajax) {
   var service = {
     init: init,
     getDeviceModelName: getDeviceModelName,
-    addDevice: addDevice
+    addDevice: addDevice,
+    getDeviceModelOptions: getDeviceModelOptions
   };
 
   return service;
@@ -37,5 +38,18 @@ function GadgetsService($q, $filter, Ajax) {
   function addDevice(device) {
     // SEND to backend
     console.log(device);
+  }
+
+  function getDeviceModelOptions() {
+    var defer = $q.defer();
+    var promisses = {};
+    promisses.device_models = Ajax.get(deviceModelsEndpoint);
+    $q.all(promisses).then(function(result) {
+      service.device_models = result.device_models.data;
+      console.log("oie");
+    }, function(error){
+      defer.reject(error);
+    });
+    return defer.promise;
   }
 };
