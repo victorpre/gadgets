@@ -27,7 +27,7 @@ function Ajax($http){
     }
     return $http({
       method: 'POST',
-      url: url,
+      url: baseUrl+url,
       data: params
     });
   }
