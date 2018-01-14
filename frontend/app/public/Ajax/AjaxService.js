@@ -32,9 +32,10 @@ function Ajax($http){
     });
   }
 
-  function del(url, params){
-    if(!params){
-      params = {};
+  function del(url, id){
+    var url = baseUrl+url;
+    if(typeof id !== "undefined"){
+      url = url+id;
     }
     return $http({
       method: 'DELETE',
