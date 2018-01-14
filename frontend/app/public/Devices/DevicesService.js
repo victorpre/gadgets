@@ -36,8 +36,19 @@ function DevicesService($q, $filter, Ajax) {
   }
 
   function addDevice(device) {
-    // SEND to backend
-    console.log(device);
+    var promisse;
+    promisse = Ajax.post(devicesEndpoint, device);
+    promisse.then(success, error);
+    return promisse;
+
+    function success(result) {
+      console.log(result);
+      service.devices.push(result.data);
+    }
+
+    function error(result) {
+      console.log(result);
+    }
   }
 
   function getDeviceModelOptions() {
