@@ -4,7 +4,7 @@ var ajax = angular.module("ajax", []);
 var navbar = angular.module("navbar", []);
 var dialog = angular.module("dialog", []);
 
-var gadgets = angular.module("gadgets", [
+var devices = angular.module("devices", [
         'ngResource'
     ]);
 
@@ -16,5 +16,5 @@ angular
       'ajax',
       'navbar',
       'dialog',
-      'gadgets'
+      'devices'
     ]);

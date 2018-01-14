@@ -2,10 +2,10 @@ angular
     .module('appRoutes', ["ui.router"])
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider.state({
-        name: 'gadgets',
+        name: 'devices',
         url: '/',
-        templateUrl: 'public/Gadgets/_gadgets.html',
-        controller: 'GadgetsController'
+        templateUrl: 'public/Devices/_devices.html',
+        controller: 'DevicesController'
     });
 
     $urlRouterProvider.otherwise('/');
