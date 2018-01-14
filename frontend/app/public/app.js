@@ -2,6 +2,7 @@
 
 var ajax = angular.module("ajax", []);
 var navbar = angular.module("navbar", []);
+var dialog = angular.module("dialog", []);
 
 var gadgets = angular.module("gadgets", [
         'ngResource'
@@ -14,5 +15,6 @@ angular
       'md.data.table',
       'ajax',
       'navbar',
+      'dialog',
       'gadgets'
     ]);
