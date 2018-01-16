@@ -102,3 +102,8 @@ ENV/
 
 # db
 db.sqlite3
+
+
+# Frontend
+frontend/node_modules/*
+frontend/app/bower_components/*
