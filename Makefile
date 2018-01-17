@@ -9,4 +9,4 @@ run-frontend:
 	cd frontend && npm start
 
 run-tests:
-	venv/bin/python3 backend/manage.py test
+	venv/bin/python3 backend/manage.py test -v 2
