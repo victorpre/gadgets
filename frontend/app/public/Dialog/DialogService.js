@@ -6,16 +6,15 @@ function DialogService($mdDialog, DevicesService) {
     cancel: cancel,
     addDevice: addDevice,
     getDeviceModelOptions: getDeviceModelOptions,
-    editableDevice: {},
     isCreate: false
   };
 
 
   return service;
 
-  function openAddDeviceDialog(device){
+  function openAddDeviceDialog(device, index){
     if (typeof device !== "undefined") {
-      service.editableDevice = device;
+      service.editedAt = index;
       service.isCreate = false;
     } else {
       service.isCreate = true;
@@ -26,9 +25,8 @@ function DialogService($mdDialog, DevicesService) {
       templateUrl: 'public/Devices/_add_dialog.html',
       parent: angular.element(document.body),
       clickOutsideToClose: true,
-      // refactor
-      onRemoving: function(el, rm){
-        service.editableDevice = {};
+      locals: {
+        device: device
       },
       fullscreen: true
     });
@@ -43,7 +41,7 @@ function DialogService($mdDialog, DevicesService) {
     if (service.isCreate) {
       DevicesService.addDevice(device);
     } else{
-      console.log("TODO: send to backend");
+      DevicesService.editDevice(device, service.editedAt);
     }
     cancel();
   }
