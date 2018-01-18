@@ -6,6 +6,7 @@ function Ajax($http){
     get: get,
     post: post,
     delete: del,
+    put: put
   };
 
   return model;
@@ -28,6 +29,23 @@ function Ajax($http){
     return $http({
       method: 'POST',
       url: baseUrl+url,
+      data: params
+    });
+  }
+
+  function put(url, params){
+    var url = baseUrl+url;
+
+    if(!params){
+      params = {};
+    }
+
+    if(typeof params.id !== "undefined"){
+      url = url+params.id;
+    }
+    return $http({
+      method: 'PUT',
+      url: url,
       data: params
     });
   }

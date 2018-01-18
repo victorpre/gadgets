@@ -9,7 +9,8 @@ function DevicesService($q, $filter, Ajax) {
     init: init,
     getDeviceModelName: getDeviceModelName,
     addDevice: addDevice,
-    removeDevice: removeDevice
+    removeDevice: removeDevice,
+    editDevice: editDevice
   };
 
   return service;
@@ -43,6 +44,22 @@ function DevicesService($q, $filter, Ajax) {
 
     function success(result) {
       service.devices.push(result.data);
+    }
+
+    function error(result) {
+      console.log(result);
+    }
+  }
+
+  function editDevice(device, index) {
+    var promisse;
+    promisse = Ajax.put(devicesEndpoint, device);
+    promisse.then(success, error);
+    return promisse;
+
+    function success(result) {
+      var updatedDevice = result.data;
+      service.devices[index] = updatedDevice;
     }
 
     function error(result) {

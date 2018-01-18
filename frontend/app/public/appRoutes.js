@@ -15,4 +15,6 @@ angular
         });
 
     $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(true).hashPrefix('!');
+
 }]);
