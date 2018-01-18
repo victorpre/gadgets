@@ -3,12 +3,12 @@ angular
     .config(['$stateProvider','$locationProvider', '$urlRouterProvider', function($stateProvider, $locationProvider, $urlRouterProvider) {
 
       $stateProvider
-        .state('devices',{
+        .state('Devices',{
           url: '/',
           templateUrl: 'public/Devices/_devices.html',
           controller: 'DevicesController'
         })
-        .state('companies',{
+        .state('Companies',{
           url: '/companies',
           templateUrl: 'public/Companies/_companies.html',
           controller: 'CompaniesController'

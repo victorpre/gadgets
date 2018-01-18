@@ -1,8 +1,9 @@
 navbar.controller('NavbarController', NavbarController );
 
-function NavbarController($scope, $mdSidenav) {
+function NavbarController($scope, $state, validPathFilter, $mdSidenav) {
 
-  $scope.openLeftMenu = function() {
+  $scope.links = validPathFilter($state.get());
+  $scope.toggleLeftMenu = function() {
     $mdSidenav('left-menu').toggle();
   }
 }
