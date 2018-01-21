@@ -1,10 +1,10 @@
-dialog.factory('DialogService', DialogService);
+dialog.factory('DevicesDialogService', DevicesDialogService);
 
-function DialogService($mdDialog, DevicesService) {
+function DevicesDialogService($mdDialog, DevicesService) {
   var service = {
     openAddDeviceDialog: openAddDeviceDialog,
-    cancel: cancel,
     addDevice: addDevice,
+    cancel: cancel,
     getDeviceModelOptions: getDeviceModelOptions,
     isCreate: false
   };
@@ -12,6 +12,16 @@ function DialogService($mdDialog, DevicesService) {
 
   return service;
 
+  function cancel(){
+    $mdDialog.cancel();
+    service.editableDevice = {};
+  }
+
+  function getDeviceModelOptions() {
+    return DevicesService.device_models;
+  }
+
+  // Devices
   function openAddDeviceDialog(device, index){
     if (typeof device !== "undefined") {
       service.editedAt = index;
@@ -21,7 +31,7 @@ function DialogService($mdDialog, DevicesService) {
     }
 
     $mdDialog.show({
-      controller: DialogController,
+      controller: DevicesDialogController,
       templateUrl: 'public/Devices/_add_dialog.html',
       parent: angular.element(document.body),
       clickOutsideToClose: true,
@@ -32,11 +42,6 @@ function DialogService($mdDialog, DevicesService) {
     });
   }
 
-  function cancel(){
-    $mdDialog.cancel();
-    service.editableDevice = {};
-  }
-
   function addDevice(device) {
     if (service.isCreate) {
       DevicesService.addDevice(device);
@@ -44,9 +49,5 @@ function DialogService($mdDialog, DevicesService) {
       DevicesService.editDevice(device, service.editedAt);
     }
     cancel();
-  }
-
-  function getDeviceModelOptions() {
-    return DevicesService.device_models;
   }
 }
