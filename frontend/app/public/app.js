@@ -8,6 +8,10 @@ var devices = angular.module("devices", [
         'ngResource'
     ]);
 
+var companies = angular.module("companies", [
+        'ngResource'
+    ]);
+
 angular
     .module('GadgetsApp', [
       'appRoutes',
@@ -16,5 +20,6 @@ angular
       'ajax',
       'navbar',
       'dialog',
-      'devices'
+      'devices',
+      'companies'
     ]);

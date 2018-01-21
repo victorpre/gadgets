@@ -1,6 +1,6 @@
 devices.controller('DevicesController', DevicesController );
 
-function DevicesController($scope, DialogService, DevicesService) {
+function DevicesController($scope, DevicesDialogService, DevicesService) {
   $scope.selected = [];
   $scope.query = {
     order: 'id',
@@ -11,6 +11,6 @@ function DevicesController($scope, DialogService, DevicesService) {
   $scope.service = DevicesService;
   $scope.service.init();
 
-  $scope.dialogService = DialogService;
+  $scope.dialogService = DevicesDialogService;
 
 }

@@ -1,0 +1,40 @@
+<md-dialog aria-label="Add a new company">
+  <form ng-cloak name="addCompanyForm" novalidate ng-submit="addCompanyForm.$valid && dialogService.addCompany(company)">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add a new company</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="dialogService.cancel()">
+          <md-icon style="color:#fff;" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>Adding a new company to the system</h2>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name</label>
+            <input required name="name" ng-model="company.name">
+            <div ng-messages="addCompanyForm.os_version.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </div>
+      </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="dialogService.cancel()">
+        Cancel
+      </md-button>
+      <md-button type="submit">
+        Save
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

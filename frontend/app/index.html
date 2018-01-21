@@ -2,6 +2,7 @@
 <html ng-app="GadgetsApp">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <base href="/"></base>
     <title>Gadgets Management</title>
 
@@ -24,22 +25,30 @@
     <script src="public/app.js"></script>
     <script src="public/Ajax/AjaxConfig.js"></script>
     <script src="public/Ajax/AjaxService.js"></script>
-    <script src="public/Dialog/DialogService.js"></script>
+
+    <!--  Filters -->
+    <script src="public/Navbar/NavbarFilter.js"></script>
 
     <!--  Controllers -->
     <script src="public/Devices/DevicesController.js"></script>
+    <script src="public/Companies/CompaniesController.js"></script>
     <script src="public/Navbar/NavbarController.js"></script>
-    <script src="public/Dialog/DialogController.js"></script>
+    <script src="public/Devices/Dialog/DevicesDialogController.js"></script>
+    <script src="public/Companies/Dialog/CompaniesDialogController.js"></script>
 
     <!--  Services -->
     <script src="public/Devices/DevicesService.js"></script>
+    <script src="public/Devices/Dialog/DevicesDialogService.js"></script>
+    <script src="public/Companies/CompaniesService.js"></script>
+    <script src="public/Companies/Dialog/CompaniesDialogService.js"></script>
+
   </head>
   <body>
     <div layout="column" ng-cloak>
-      <section layout="row" flex>
-        <md-toolbar ng-controller="NavbarController" class="md-hue-2">
+      <section ng-controller="NavbarController" layout="row" flex>
+        <md-toolbar class="md-hue-2">
           <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Menu" ng-disabled="false" ng-click="openLeftMenu()">
+            <md-button class="md-icon-button" aria-label="Menu" ng-disabled="false" ng-click="toggleLeftMenu()">
               <i class="material-icons" style="color:#fff;">menu</i>
             </md-button>
             <h2 flex md-truncate>Gadgets Management</h2>
@@ -54,6 +63,14 @@
           </md-toolbar>
           <md-content flex layout-padding>
             <!-- Menu -->
+            <md-list>
+              <md-list-item class="md-3-line" ng-repeat="link in links" ng-href="{{link.url}}" ng-click="toggleLeftMenu()">
+                <div class="md-list-item-text" layout="column">
+                  <h2>{{link.name}}</h2>
+                </div>
+                <md-divider inset></md-divider>
+              </md-list-item>
+            </md-list>
           </md-content>
         </md-sidenav>
       </section>
