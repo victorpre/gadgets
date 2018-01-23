@@ -1,7 +1,6 @@
 devices.controller('DevicesController', DevicesController );
 
 function DevicesController($scope, DevicesDialogService, DevicesService) {
-  $scope.selected = [];
   $scope.query = {
     order: 'id',
     limit: 5,
@@ -13,4 +12,5 @@ function DevicesController($scope, DevicesDialogService, DevicesService) {
 
   $scope.dialogService = DevicesDialogService;
 
+  $scope.filters_partial = 'public/Devices/_filters.html'
 }
