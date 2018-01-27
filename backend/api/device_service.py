@@ -17,9 +17,9 @@ def get_devices(filters={}):
     if capacity is not None:
         queryset = queryset.filter(capacity=capacity)
     if color is not None:
-        queryset = queryset.filter(color=color)
+        queryset = queryset.filter(color__icontains=color)
     if os_version is not None:
-        queryset = queryset.filter(os_version=os_version)
+        queryset = queryset.filter(os_version__icontains=os_version)
     return queryset
 
 def get_device(pk):
