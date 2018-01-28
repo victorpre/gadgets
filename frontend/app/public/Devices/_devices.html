@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row md-select="device" ng-repeat="device in service.devices | orderBy: query.order">
+        <tr md-row md-select="device" ng-repeat="device in service.devices | orderBy: query.order | filter: service.filter:strict">
           <td md-cell> {{ device.id }} </td>
           <td md-cell> {{ service.getDeviceModelName(device.device_model_id) }} </td>
           <td md-cell> {{ device.capacity }} GB </td>
