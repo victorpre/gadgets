@@ -17,9 +17,10 @@ function DevicesService($q, $filter, Ajax) {
 
   function init() {
     var defer = $q.defer();
+    var promisses = {};
     service.devices = [];
     service.device_models = [];
-    var promisses = {};
+    service.filter = {};
     promisses.devices = Ajax.get(devicesEndpoint);
     promisses.device_models = Ajax.get(deviceModelsEndpoint);
     $q.all(promisses).then(function(result) {

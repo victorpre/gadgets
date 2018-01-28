@@ -1,0 +1,32 @@
+<div class="md-toolbar-tools">
+  <span>Filter</span>
+</div>
+
+<div layout-padding>
+  <form name="filterForm">
+    <div layout-gt-xs="row">
+      <md-input-container class="md-block" flex-gt-xs>
+        <label>Device Model</label>
+        <md-select name="device_model" ng-model="service.filter.device_model_id" md-on-open="dialogService.getDeviceModelOptions()" >
+          <md-option ng-value=""><em>None</em></md-option>
+          <md-option ng-repeat="device_model in dialogService.getDeviceModelOptions()" ng-value="device_model.id">
+            {{device_model.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-xs>
+        <label>Capacity</label>
+        <input  name="capacity" ng-model="service.filter.capacity">
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-xs>
+        <label>Color</label>
+        <input name="color" ng-model="service.filter.color">
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-xs>
+        <label>OS Version</label>
+        <input name="os_version" ng-model="service.filter.os_version">
+      </md-input-container>
+    </div>
+  </form>
+</div>
+

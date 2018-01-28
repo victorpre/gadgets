@@ -14,7 +14,10 @@ from .models import (
                 Device,
             )
 
-from . import company_service
+from . import (
+            company_service,
+            device_service,
+        )
 
 class CompanyListCreateView(APIView):
     """This class defines the create behavior of our rest api."""
@@ -85,7 +88,8 @@ class DeviceListCreateView(APIView):
 
     def get(self, request, format=None):
         """Retrieves the list of devices. """
-        devices = Device.objects.all()
+        #devices = Device.objects.all()
+        devices = device_service.get_devices(request.query_params)
         serializer = DeviceSerializer(devices, many=True)
         return Response(serializer.data)
 
