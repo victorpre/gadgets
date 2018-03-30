@@ -3,6 +3,17 @@
 [![Build Status](https://travis-ci.org/victorpre/gadgets.svg?branch=master)](https://travis-ci.org/victorpre/gadgets)
 
 
+## Running:
+
+Backend:
+
+- `make build-backend`
+- `make run-backend`
+
+Frontend:
+
+- `make run-frontend`
+
 ## Development Instructions:
 
 - `git clone https://github.com/victorpre/gadgets.git && cd gadgets`
